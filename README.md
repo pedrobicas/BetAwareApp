@@ -4,6 +4,13 @@ Um aplicativo mobile em **React Native** desenvolvido durante a Sprint Acadêmic
 
 ---
 
+## Repositórios Relacionados
+
+- **Aplicativo Mobile (React Native):** [https://github.com/pedrobicas/BetAwareApp](https://github.com/pedrobicas/BetAwareApp)
+- **Aplicação Web (Angular):** [https://github.com/pedrobicas/BetAwareWeb](https://github.com/pedrobicas/BetAwareWeb)
+
+---
+
 ## 🎯 Objetivo
 
 O aplicativo **não envolve dinheiro real**, sendo voltado para **autoavaliação e controle emocional**. Ele simula uma experiência de apostas com foco em:
