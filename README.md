@@ -11,6 +11,12 @@ Um aplicativo mobile em **React Native** desenvolvido durante a Sprint Acadêmic
 
 ---
 
+## 🎨 Protótipo no Figma
+
+- [🔗 Protótipo do Figma](https://www.figma.com/design/d9LYsdSEWWUUzPges1iwfL/BetAware?node-id=0-1&t=C0BW4G2tcF60FcfY-1)
+
+---
+
 ## 🎯 Objetivo
 
 O aplicativo **não envolve dinheiro real**, sendo voltado para **autoavaliação e controle emocional**. Ele simula uma experiência de apostas com foco em:
