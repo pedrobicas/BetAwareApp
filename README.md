@@ -4,11 +4,11 @@ Um aplicativo mobile em **React Native** desenvolvido durante a Sprint Acadêmic
 
 ---
 
-## Repositórios Relacionados
+## Repositórios
 
 - **Aplicativo Mobile (React Native):** [https://github.com/pedrobicas/BetAwareApp](https://github.com/pedrobicas/BetAwareApp)
 - **Aplicação Web (Angular):** [https://github.com/pedrobicas/BetAwareWeb](https://github.com/pedrobicas/BetAwareWeb)
-
+- **API (SpringBoot):** [https://github.com/pedrobicas/BetAwareAPI](https://github.com/pedrobicas/BetAwareAPI)
 ---
 
 ## 🎨 Protótipo no Figma
