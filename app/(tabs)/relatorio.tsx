@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import { PieChart, BarChart } from 'react-native-chart-kit';
-import { Dimensions } from 'react-native';
-import  api  from '../services/api';
+import React, { useState } from 'react';
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { BarChart, PieChart } from 'react-native-chart-kit';
+import api from '../service/api';
 
 const width = Dimensions.get('window').width - 40;
 
