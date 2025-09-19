@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router, useFocusEffect } from 'expo-router';
+import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
   ActivityIndicator,
   Alert,
-  Platform
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { router, useFocusEffect } from 'expo-router';
-import api from '../services/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Colors } from '@/constants/Colors';
+import { IconSymbol } from '../components/ui/IconSymbol';
+import { Colors } from '../constants/Colors';
+import { useColorScheme } from '../hooks/useColorScheme';
+import api from '../service/api';
+import { shadows } from '../utils/shadows';
 
 interface Aposta {
   id: number;
@@ -248,11 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3
+    ...shadows.medium
   },
   statIcon: {
     width: 50,
@@ -283,11 +279,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 15,
     borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3
+    ...shadows.medium
   },
   sectionTitle: {
     fontSize: 18,

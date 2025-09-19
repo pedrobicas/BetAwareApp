@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, RefreshControl, ScrollView } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import api from '../services/api';
+import React, { useEffect, useState } from 'react';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import api from '../service/api';
 
 interface Aposta {
   id: number;

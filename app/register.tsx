@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { router } from 'expo-router';
+import { useState } from 'react';
 import {
-  View,
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  Alert,
-  ActivityIndicator,
-  ScrollView
+  View
 } from 'react-native';
-import { router } from 'expo-router';
-import api from './services/api';
+import api from './service/api';
 
 export default function RegisterScreen() {
   const [username, setUsername] = useState('');
