@@ -4,6 +4,37 @@ Um aplicativo mobile em **React Native** desenvolvido durante a Sprint Acadêmic
 
 ---
 
+## 🌐 Integração com API REST
+
+O aplicativo está integrado com uma **API REST** desenvolvida em Spring Boot e hospedada no **Render**:
+
+- **URL da API**: `https://betawarenodeapi.onrender.com/api/v1`
+- **Funcionalidades**:
+  - Autenticação JWT (login/registro)
+  - Gerenciamento de apostas (CRUD)
+  - Sincronização de dados entre dispositivos
+  - Validação de dados no servidor
+
+### ⚠️ Limitações da Hospedagem Gratuita (Render)
+
+- **Cold Start**: A API pode demorar 30-60 segundos para responder na primeira requisição após inatividade
+- **Timeout**: Conexões podem falhar por timeout durante o cold start
+- **Recursos Limitados**: CPU e memória limitados podem causar lentidão
+- **Disponibilidade**: Pode haver instabilidade ocasional do serviço gratuito
+- **Hibernação**: O serviço hiberna após 15 minutos de inatividade
+
+### 🔄 Estratégias de Mitigação
+
+O aplicativo implementa várias estratégias para lidar com essas limitações:
+
+1. **Verificação de Saúde da API**: Checagem automática a cada 30 segundos
+2. **Fallback Offline**: Funcionamento completo sem conexão com a API
+3. **Retry Logic**: Tentativas automáticas de reconexão
+4. **Cache Local**: Dados salvos localmente para acesso imediato
+5. **Indicadores Visuais**: Status de conexão visível para o usuário
+
+---
+
 ## Repositórios
 
 - **Aplicativo Mobile (React Native):** [https://github.com/pedrobicas/BetAwareApp](https://github.com/pedrobicas/BetAwareApp)
@@ -40,6 +71,7 @@ O aplicativo **não envolve dinheiro real**, sendo voltado para **autoavaliaçã
 - ✅ Modo escuro (dark mode) compatível.
 - ✅ Seção de **notícias** sobre vício em apostas.
 - ✅ Armazenamento com `AsyncStorage`.
+- ✅ **Integração com API REST** hospedada no Render.
 - ✅ **Modo Offline** completo:
   - Login e cadastro offline
   - Criação e listagem de apostas
@@ -120,12 +152,12 @@ O aplicativo foi projetado para funcionar completamente offline:
 
 ## 💡 Ideias Futuras
 
-- Autenticação com API REST.
 - Exportação do histórico em PDF.
 - Notificações personalizadas sobre comportamento compulsivo.
 - Ranking de autocontrole com gamificação.
 - Sincronização em tempo real com WebSocket.
 - Backup automático dos dados locais.
+- Migração para hospedagem paga para melhor performance da API.
 
 ---
 
