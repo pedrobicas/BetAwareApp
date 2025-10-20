@@ -120,7 +120,7 @@ O aplicativo foi projetado para funcionar completamente offline:
 
 ## 💡 Ideias Futuras
 
-- Autenticação com Firebase.
+- Autenticação com API REST.
 - Exportação do histórico em PDF.
 - Notificações personalizadas sobre comportamento compulsivo.
 - Ranking de autocontrole com gamificação.

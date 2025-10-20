@@ -27,7 +27,7 @@ interface Usuario {
   senha: string;
 }
 
-const API_URL = 'http://localhost:8080/api/v1';
+const API_URL = 'https://betawarenodeapi.onrender.com/api/v1';
 const HEALTH_CHECK_INTERVAL = 30000; // 30 segundos
 
 const api = axios.create({
@@ -105,7 +105,14 @@ export const login = async (credentials: { username: string; senha: string }) =>
       throw new Error('Usuário não encontrado');
     }
 
-    const response = await api.post('/auth/login', credentials);
+    // Mapear campos para o formato esperado pela API
+    // A API espera email no login, então vamos usar o username como email
+    const apiCredentials = {
+      email: credentials.username,  // username -> email (API espera email)
+      password: credentials.senha   // senha -> password
+    };
+
+    const response = await api.post('/auth/login', apiCredentials);
     const { token, username, nome, perfil } = response.data;
     
     const userData = { token, username, nome, perfil };
@@ -141,7 +148,18 @@ export const register = async (userData: Usuario) => {
       return;
     }
 
-    await api.post('/auth/register', userData);
+    // Mapear campos para o formato esperado pela API
+    const apiData = {
+      username: userData.username,
+      name: userData.nome,  // nome -> name
+      email: userData.email,
+      cpf: userData.cpf,
+      cep: userData.cep,
+      endereco: userData.endereco,
+      password: userData.senha  // senha -> password
+    };
+
+    await api.post('/auth/register', apiData);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const errorMessage = error.response?.data?.message || 'Erro ao cadastrar';
@@ -190,21 +208,35 @@ export const criarAposta = async (aposta: NovaAposta) => {
 export const listarApostas = async () => {
   try {
     if (!isApiAvailable) {
-      return await getLocalData('apostas') || [];
+      const localData = await getLocalData('apostas');
+      return Array.isArray(localData) ? localData : [];
     }
 
     const response = await api.get('/apostas');
-    await setLocalData('apostas', response.data);
-    return response.data;
+    
+    // A API retorna { success: true, data: [...], total: number }
+    // Precisamos extrair apenas o array de apostas do campo 'data'
+    let data = [];
+    if (response.data && response.data.success && Array.isArray(response.data.data)) {
+      data = response.data.data;
+    } else if (Array.isArray(response.data)) {
+      // Fallback para caso a API retorne diretamente um array
+      data = response.data;
+    }
+    
+    await setLocalData('apostas', data);
+    return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const apostasLocais = await getLocalData('apostas');
       if (apostasLocais) {
-        return apostasLocais;
+        return Array.isArray(apostasLocais) ? apostasLocais : [];
       }
-      throw new Error(error.response?.data?.message || 'Erro ao listar apostas');
+      // Retornar array vazio em caso de erro
+      return [];
     }
-    throw error;
+    // Retornar array vazio em caso de erro
+    return [];
   }
 };
 
@@ -219,7 +251,18 @@ export const listarApostasPorPeriodo = async (inicio: string, fim: string) => {
     }
 
     const response = await api.get(`/apostas/periodo?inicio=${inicio}&fim=${fim}`);
-    return response.data;
+    
+    // A API retorna { success: true, data: [...], total: number }
+    // Precisamos extrair apenas o array de apostas do campo 'data'
+    let data = [];
+    if (response.data && response.data.success && Array.isArray(response.data.data)) {
+      data = response.data.data;
+    } else if (Array.isArray(response.data)) {
+      // Fallback para caso a API retorne diretamente um array
+      data = response.data;
+    }
+    
+    return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const apostasLocais = await getLocalData('apostas');
@@ -229,9 +272,11 @@ export const listarApostasPorPeriodo = async (inicio: string, fim: string) => {
           return dataAposta >= new Date(inicio) && dataAposta <= new Date(fim);
         });
       }
-      throw new Error(error.response?.data?.message || 'Erro ao listar apostas por período');
+      // Retornar array vazio em caso de erro
+      return [];
     }
-    throw error;
+    // Retornar array vazio em caso de erro
+    return [];
   }
 };
 

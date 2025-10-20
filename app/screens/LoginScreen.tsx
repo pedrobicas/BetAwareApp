@@ -85,13 +85,14 @@ export default function LoginScreen() {
       <View style={styles.formGroup}>
         <TextInput
           style={[styles.input, usernameError ? styles.inputError : null]}
-          placeholder="Usuário"
+          placeholder="Email ou Usuário"
           value={username}
           onChangeText={(text) => {
             setUsername(text);
             setUsernameError('');
           }}
           autoCapitalize="none"
+          keyboardType="email-address"
         />
         {usernameError ? <Text style={styles.errorText}>{usernameError}</Text> : null}
       </View>

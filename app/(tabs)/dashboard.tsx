@@ -50,8 +50,10 @@ export default function DashboardScreen() {
 
       // Carregar apostas
       const dados = await api.listarApostas();
-      setApostas(dados);
-      calcularEstatisticas(dados);
+      // Garantir que dados seja sempre um array
+      const apostasArray = Array.isArray(dados) ? dados : [];
+      setApostas(apostasArray);
+      calcularEstatisticas(apostasArray);
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
       Alert.alert('Erro', 'Ocorreu um erro ao carregar os dados');
