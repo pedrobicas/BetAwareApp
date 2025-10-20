@@ -253,6 +253,20 @@ export const isAuthenticated = async () => {
   return !!token;
 };
 
+// Função para tentar novamente em caso de falha
+export const retryOperation = async (operation: () => Promise<any>, maxRetries = 3, delay = 1000) => {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await operation();
+    } catch (error) {
+      if (attempt === maxRetries) {
+        throw error;
+      }
+      await new Promise(resolve => setTimeout(resolve, delay * attempt));
+    }
+  }
+};
+
 export default {
   login,
   register,
@@ -261,5 +275,6 @@ export default {
   criarAposta,
   listarApostas,
   listarApostasPorPeriodo,
-  checkApiHealth
-}; 
+  checkApiHealth,
+  retryOperation
+};
