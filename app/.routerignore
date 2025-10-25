@@ -1,0 +1,8 @@
+# Ignorar arquivos que não são rotas
+components/
+constants/
+hooks/
+config/
+utils/
+*.ts
+!*.tsx
